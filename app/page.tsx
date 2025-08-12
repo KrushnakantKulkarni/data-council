@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 
 type Course = {
@@ -212,6 +212,13 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<"featured" | "durationAsc" | "durationDesc" | "priceAsc" | "priceDesc">(
     "featured",
   );
+  
+  // Popup states
+  const [showPrimaryPopup, setShowPrimaryPopup] = useState(false);
+  const [showExitIntentPopup, setShowExitIntentPopup] = useState(false);
+  const [showScrollPopup, setShowScrollPopup] = useState(false);
+  const [hasShownPrimary, setHasShownPrimary] = useState(false);
+  const [hasShownScroll, setHasShownScroll] = useState(false);
 
   const filtered = useMemo(() => {
     const normalize = (s: string) => s.toLowerCase();
@@ -268,6 +275,86 @@ export default function Home() {
   const toggleFrom = (list: string[], value: string) =>
     list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
 
+  // Popup timing logic
+  useEffect(() => {
+    // Primary popup after 35 seconds
+    const primaryTimer = setTimeout(() => {
+      if (!hasShownPrimary) {
+        setShowPrimaryPopup(true);
+        setHasShownPrimary(true);
+        localStorage.setItem('lastPopupDate', new Date().toDateString());
+      }
+    }, 35000);
+
+    // Exit intent popup
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && !hasShownPrimary) {
+        setShowExitIntentPopup(true);
+        localStorage.setItem('lastPopupDate', new Date().toDateString());
+      }
+    };
+
+    // Scroll-based popup after 60% scroll
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 60 && !hasShownScroll && !hasShownPrimary) {
+        setShowScrollPopup(true);
+        setHasShownScroll(true);
+        localStorage.setItem('lastPopupDate', new Date().toDateString());
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(primaryTimer);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [hasShownPrimary, hasShownScroll]);
+
+  // Close popup functions
+  const closePopup = (type: 'primary' | 'exit' | 'scroll') => {
+    switch (type) {
+      case 'primary':
+        setShowPrimaryPopup(false);
+        break;
+      case 'exit':
+        setShowExitIntentPopup(false);
+        break;
+      case 'scroll':
+        setShowScrollPopup(false);
+        break;
+    }
+  };
+
+  // Form submission handler
+  const handlePopupFormSubmit = (e: React.FormEvent, popupType: string) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const name = formData.get('name') as string;
+    const phone = formData.get('phone') as string;
+    
+    // Here you would typically send the data to your backend
+    console.log(`Lead captured from ${popupType} popup:`, { name, phone });
+    
+    // Show success message and close popup
+    alert(`Thank you ${name}! We'll call you at ${phone} within 24 hours.`);
+    closePopup(popupType as 'primary' | 'exit' | 'scroll');
+  };
+
+  // Check if user has already seen popups today
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const lastPopupDate = localStorage.getItem('lastPopupDate');
+    
+    if (lastPopupDate === today) {
+      setHasShownPrimary(true);
+      setHasShownScroll(true);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Hero Section */}
@@ -278,7 +365,7 @@ export default function Home() {
             <div className="relative px-6 py-10 sm:px-10 sm:py-14 md:py-16">
               <div className="flex flex-col gap-4 md:gap-6">
                 <span className="inline-flex items-center gap-2 self-start rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-                  <span>🎓</span> #1 AI & Data Science Institute
+                  <span>🎓</span> #1 AI & Data Science Institute in Maharashtra
                 </span>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">
                   Launch Your Tech Career in <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-teal-600">AI & Data Science</span>
@@ -286,6 +373,7 @@ export default function Home() {
                 <p className="max-w-3xl text-sm sm:text-base text-gray-700">
                   Join 15,000+ students who transformed their careers. Learn from industry experts, build real projects, 
                   and get hired with our proven job placement program. <strong>No prior experience required!</strong>
+                  <br /><span className="text-indigo-600 font-medium">📍 Located in Pune, serving students across Maharashtra</span>
                 </p>
                 <div className="flex flex-wrap gap-3 pt-1">
                   <a
@@ -619,6 +707,162 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Lead Capture Section */}
+      <section id="lead-capture" className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
+                Get Your Free Career Consultation
+              </h2>
+              <p className="text-lg text-gray-700 mb-6">
+                Ready to start your journey in AI & Data Science? Our expert counselors will help you:
+              </p>
+              <ul className="space-y-3 text-gray-700 mb-8">
+                <li className="flex items-center gap-3">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <span>Choose the right course for your career goals</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <span>Get personalized learning roadmap</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <span>Understand job opportunities in your area</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-green-500 text-xl">✓</span>
+                  <span>Learn about scholarships and payment plans</span>
+                </li>
+              </ul>
+              
+              <div className="bg-white p-4 rounded-lg border border-blue-200">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-2xl">📍</span>
+                  <div>
+                    <div className="font-semibold text-gray-900">Visit Our Campus</div>
+                    <div className="text-sm text-gray-600">3rd Floor, Above Jijamata Mahila Sahakari Bank</div>
+                    <div className="text-sm text-gray-600">Karvenagar, Pune, Maharashtra - 411052</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📞</span>
+                  <div>
+                    <div className="font-semibold text-gray-900">Call Us</div>
+                    <div className="text-sm text-gray-600">+91 8080152238</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-2xl border border-blue-200 p-6 sm:p-8 shadow-lg">
+              <h3 className="text-xl font-semibold mb-6 text-center text-gray-900">
+                Get Free Consultation
+              </h3>
+              <form className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Enter your full name"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    placeholder="+91 98765 43210"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="your.email@example.com"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                    City/Location *
+                  </label>
+                  <select
+                    id="location"
+                    name="location"
+                    required
+                    className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                  >
+                    <option value="">Select your city</option>
+                    <option value="pune">Pune</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="nagpur">Nagpur</option>
+                    <option value="aurangabad">Aurangabad</option>
+                    <option value="nashik">Nashik</option>
+                    <option value="kolhapur">Kolhapur</option>
+                    <option value="solapur">Solapur</option>
+                    <option value="amravati">Amravati</option>
+                    <option value="other">Other Maharashtra City</option>
+                    <option value="other-state">Other State</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
+                    Course Interest
+                  </label>
+                  <select
+                    id="interest"
+                    name="interest"
+                    className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                  >
+                    <option value="">Select course of interest</option>
+                    <option value="data-science">Data Science</option>
+                    <option value="ai-automation">AI Automation</option>
+                    <option value="machine-learning">Machine Learning</option>
+                    <option value="llm-engineering">LLM Engineering</option>
+                    <option value="mlops">MLOps</option>
+                    <option value="data-analytics">Data Analytics</option>
+                    <option value="not-sure">Not Sure - Need Guidance</option>
+                  </select>
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-teal-600 text-white py-3 font-medium hover:shadow-lg transition-all hover:-translate-y-0.5"
+                >
+                  🚀 Get Free Consultation
+                </button>
+                
+                <p className="text-xs text-gray-500 text-center">
+                  By submitting this form, you agree to receive communication from Data Council. 
+                  We respect your privacy and will never share your information.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
         <div className="mx-auto max-w-7xl">
@@ -631,12 +875,12 @@ export default function Home() {
               Start learning today with our risk-free trial!
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <button className="rounded-full bg-white text-indigo-600 px-8 py-3 font-medium hover:shadow-lg transition-all hover:-translate-y-0.5">
+              <a href="#lead-capture" className="rounded-full bg-white text-indigo-600 px-8 py-3 font-medium hover:shadow-lg transition-all hover:-translate-y-0.5">
                 🚀 Start Free Trial
-              </button>
-              <button className="rounded-full border border-white/30 text-white px-8 py-3 font-medium hover:bg-white/10 transition">
+              </a>
+              <a href="#lead-capture" className="rounded-full border border-white/30 text-white px-8 py-3 font-medium hover:bg-white/10 transition">
                 📞 Talk to Counselor
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -679,7 +923,8 @@ export default function Home() {
               <div className="text-sm text-gray-700 space-y-2">
                 <p>📧 hr@datacouncil.in</p>
                 <p>📞 +91 8080152238</p>
-                <p>📍 Pune, Maharashtra</p>
+                <p>📍 3rd Floor, Above Jijamata Mahila Sahakari Bank</p>
+                <p>📍 Karvenagar, Pune, Maharashtra - 411052</p>
                 <p>⏰ Mon-Fri: 9AM-6PM</p>
               </div>
             </div>
@@ -690,6 +935,160 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Popup Components */}
+      {/* Primary Popup - 35 seconds delay */}
+      {showPrimaryPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+            <div className="text-center mb-6">
+              <div className="text-4xl mb-3">🎓</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Start Your AI Career Journey!
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Get a free consultation and personalized learning roadmap
+              </p>
+            </div>
+            
+            <form className="space-y-4" onSubmit={(e) => handlePopupFormSubmit(e, 'primary')}>
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Full Name *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-teal-600 text-white py-3 font-medium hover:shadow-lg transition-all"
+              >
+                🚀 Get Free Consultation
+              </button>
+            </form>
+            
+            <button
+              onClick={() => closePopup('primary')}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Exit Intent Popup */}
+      {showExitIntentPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+            <div className="text-center mb-6">
+              <div className="text-4xl mb-3">⏰</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Wait! Don't Miss This Opportunity
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Get your free career consultation before you go
+              </p>
+            </div>
+            
+            <form className="space-y-4" onSubmit={(e) => handlePopupFormSubmit(e, 'exit')}>
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Full Name *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-teal-600 text-white py-3 font-medium hover:shadow-lg transition-all"
+              >
+                📞 Get Free Call Back
+              </button>
+            </form>
+            
+            <button
+              onClick={() => closePopup('exit')}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Scroll-Based Popup - After 60% scroll */}
+      {showScrollPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+            <div className="text-center mb-6">
+              <div className="text-4xl mb-3">💡</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Ready to Take Action?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                You've seen our courses, now let's plan your career
+              </p>
+            </div>
+            
+            <form className="space-y-4" onSubmit={(e) => handlePopupFormSubmit(e, 'scroll')}>
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Full Name *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number *"
+                  required
+                  className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full rounded-lg bg-gradient-to-r from-indigo-600 to-teal-600 text-white py-3 font-medium hover:shadow-lg transition-all"
+              >
+                🎯 Plan My Career
+              </button>
+            </form>
+            
+            <button
+              onClick={() => closePopup('scroll')}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
