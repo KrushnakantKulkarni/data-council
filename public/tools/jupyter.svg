@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Jupyter">
+  <defs>
+    <linearGradient id="gjp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+  <rect rx="14" ry="14" width="64" height="64" fill="url(#gjp)"/>
+  <g transform="translate(12 18)" fill="#fff">
+    <ellipse cx="20" cy="8" rx="14" ry="6"/>
+    <ellipse cx="20" cy="20" rx="14" ry="6"/>
+    <circle cx="8" cy="2" r="2"/>
+    <circle cx="32" cy="26" r="2"/>
+  </g>
+</svg>
+

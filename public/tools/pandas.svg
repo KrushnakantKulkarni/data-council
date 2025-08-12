@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Pandas">
+  <defs>
+    <linearGradient id="gpd" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <rect rx="14" ry="14" width="64" height="64" fill="url(#gpd)"/>
+  <g transform="translate(18 12)" fill="#fff">
+    <rect x="0" y="4" width="6" height="28" rx="2"/>
+    <rect x="10" y="0" width="6" height="36" rx="2"/>
+    <rect x="20" y="8" width="6" height="24" rx="2"/>
+  </g>
+</svg>
+

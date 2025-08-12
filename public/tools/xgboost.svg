@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="XGBoost">
+  <defs>
+    <linearGradient id="gx" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect rx="14" ry="14" width="64" height="64" fill="url(#gx)"/>
+  <g transform="translate(16 16)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 24L12 12l8 8 12-12"/>
+    <circle cx="12" cy="12" r="3" fill="#fff" stroke="none"/>
+    <circle cx="20" cy="20" r="3" fill="#fff" stroke="none"/>
+  </g>
+</svg>
+

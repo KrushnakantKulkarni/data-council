@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
@@ -425,6 +424,92 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI-Powered Learning Tools */}
+      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
+              AI-Powered Learning Platform
+            </h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+              Master the future of technology with our comprehensive suite of AI tools and learning technologies
+            </p>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-teal-600 text-white px-6 py-2 rounded-full text-sm font-medium">
+              <span>🚀</span> 40+ AI Tools & Technologies
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+            {/* AI Development Tools */}
+            {[
+              { name: "OpenAI GPT", src: "/tools/openai.svg" },
+              { name: "LangChain", src: "/tools/langchain.svg" },
+              { name: "Vector DB", src: "/tools/vector-db.svg" },
+              { name: "Hugging Face", src: "/tools/huggingface.svg" },
+              { name: "Pandas", src: "/tools/pandas.svg" },
+              { name: "PyTorch", src: "/tools/pytorch.svg" },
+            ].map((tool) => (
+              <div key={tool.name} className="text-center p-4 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-md hover:shadow-md transition-shadow group">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
+                  <Image src={tool.src} alt={tool.name} width={48} height={48} />
+                </div>
+                <div className="text-xs font-medium text-gray-700">{tool.name}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+            {/* Data Science Tools */}
+            {[
+              { name: "Scikit-learn", src: "/tools/scikit.svg" },
+              { name: "XGBoost", src: "/tools/xgboost.svg" },
+              { name: "Matplotlib", src: "/tools/matplotlib.svg" },
+              { name: "Seaborn", src: "/tools/matplotlib.svg" },
+              { name: "Jupyter", src: "/tools/jupyter.svg" },
+              { name: "NumPy", src: "/tools/numpy.svg" },
+            ].map((tool) => (
+              <div key={tool.name} className="text-center p-4 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-md hover:shadow-md transition-shadow group">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
+                  <Image src={tool.src} alt={tool.name} width={48} height={48} />
+                </div>
+                <div className="text-xs font-medium text-gray-700">{tool.name}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+            {/* MLOps & Cloud Tools */}
+            {[
+              { name: "Kubernetes", src: "/tools/kubernetes.svg" },
+              { name: "Docker", src: "/tools/docker.svg" },
+              { name: "MLflow", src: "/tools/mlflow.svg" },
+              { name: "AWS SageMaker", src: "/tools/aws-sagemaker.svg" },
+              { name: "GitHub Actions", src: "/tools/github-actions.svg" },
+              { name: "Prometheus", src: "/tools/prometheus.svg" },
+            ].map((tool) => (
+              <div key={tool.name} className="text-center p-4 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-md hover:shadow-md transition-shadow group">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-lg overflow-hidden group-hover:scale-110 transition-transform">
+                  <Image src={tool.src} alt={tool.name} width={48} height={48} />
+                </div>
+                <div className="text-xs font-medium text-gray-700">{tool.name}</div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <p className="text-gray-600 mb-4">
+              And 25+ more cutting-edge AI tools and technologies
+            </p>
+            <a
+              href="#lead-capture"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-teal-600 text-white px-6 py-3 font-medium hover:shadow-lg transition-all hover:-translate-y-0.5"
+            >
+              🚀 Start Learning with AI Tools
+            </a>
           </div>
         </div>
       </section>
