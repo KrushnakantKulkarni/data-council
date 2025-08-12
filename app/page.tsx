@@ -428,6 +428,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Placed Students Carousel */}
+      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 text-gray-900">Our Placed Students</h2>
+            <p className="text-gray-700">Real outcomes: where our students are working and their packages</p>
+          </div>
+
+          <div className="relative overflow-hidden dc-carousel">
+            <div className="dc-carousel-track">
+              {[
+                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                // duplicate entries to create seamless loop
+                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+              ].map((s, idx) => (
+                <div key={idx} className="w-72 shrink-0 mr-4 last:mr-0">
+                  <div className="rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-indigo-50">
+                        <Image src={s.photo} alt={s.name} width={56} height={56} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900 leading-tight">{s.name}</div>
+                        <div className="text-xs text-gray-600">{s.role} at {s.company}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Package: {s.pkg}</div>
+                      <div className="h-6 w-20 overflow-hidden">
+                        <Image src={s.companyLogo} alt={s.company} width={80} height={24} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-6 text-xs text-gray-500">Auto-scrolling every ~3s per card. Hover to pause.</div>
+        </div>
+      </section>
+
       {/* AI-Powered Learning Tools */}
       <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
         <div className="mx-auto max-w-7xl">
@@ -970,6 +1022,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      
 
       {/* Footer */}
       <footer className="px-6 sm:px-10 md:px-14 lg:px-20 py-12 border-t border-blue-200 bg-white">
