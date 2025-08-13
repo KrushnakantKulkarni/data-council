@@ -602,6 +602,56 @@ export default function Home() {
         </div>
       </section>
 
+        {/* Testimonial Videos Section */}
+        <section id="testimonial-videos" className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-indigo-50 to-blue-50">
+          <div className="mx-auto max-w-7xl">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
+                Video Testimonials from Placed Students
+              </h2>
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+                Watch our students share their placement journeys and experiences at Data Council
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Example videos, replace src with actual video URLs */}
+              <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-shadow flex flex-col items-center">
+                <video controls width="320" poster="/students/student1.svg">
+                  <source src="/videos/testimonial1.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="mt-4 text-center">
+                  <div className="font-semibold text-gray-900">Priya Sharma</div>
+                  <div className="text-sm text-gray-600">Data Analyst at TCS</div>
+                  <blockquote className="italic text-gray-700 mt-2">“I got placed at TCS after completing the Data Science course!”</blockquote>
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-shadow flex flex-col items-center">
+                <video controls width="320" poster="/students/student2.svg">
+                  <source src="/videos/testimonial2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="mt-4 text-center">
+                  <div className="font-semibold text-gray-900">Rahul Patel</div>
+                  <div className="text-sm text-gray-600">AI Engineer at Infosys</div>
+                  <blockquote className="italic text-gray-700 mt-2">“The hands-on projects helped me crack my interview!”</blockquote>
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-md transition-shadow flex flex-col items-center">
+                <video controls width="320" poster="/students/student3.svg">
+                  <source src="/videos/testimonial3.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="mt-4 text-center">
+                  <div className="font-semibold text-gray-900">Anjali Desai</div>
+                  <div className="text-sm text-gray-600">ML Engineer at Wipro</div>
+                  <blockquote className="italic text-gray-700 mt-2">“Supportive mentors and practical learning!”</blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       {/* Why Choose Us */}
       <section id="about" className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
         <div className="mx-auto max-w-7xl">
