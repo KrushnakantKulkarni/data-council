@@ -427,141 +427,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Campus Life Section */}
-      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-teal-50 to-indigo-100">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">Campus Life at Data Council</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Experience vibrant learning, collaboration, and innovation. See our students in action—attending classes, discussing ideas, and presenting their projects.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {/* Example campus photos, replace src and captions with real images */}
-            {[ 
-              { src: "/students/student1.svg", caption: "Live class: AI Automation" },
-              { src: "/students/student2.svg", caption: "Group discussion: Data Science" },
-              { src: "/students/student3.svg", caption: "Project presentation: ML Model" },
-              { src: "/students/student1.svg", caption: "Peer learning: Python Lab" },
-              { src: "/students/student2.svg", caption: "Mentor Q&A: Career Guidance" },
-              { src: "/students/student3.svg", caption: "Teamwork: Analytics Challenge" },
-              { src: "/students/student1.svg", caption: "Showcase: Final Projects" },
-              { src: "/students/student2.svg", caption: "Collaboration: LLM Ops" },
-            ].map((photo, idx) => (
-              <div key={idx} className="group p-4 rounded-2xl border border-teal-200 bg-white/90 shadow-sm flex flex-col items-center transition-all duration-300 hover:scale-105 hover:z-10">
-                <div className="w-32 h-32 mb-4 rounded-xl overflow-hidden bg-indigo-50 flex items-center justify-center">
-                  <Image src={photo.src} alt={photo.caption} width={128} height={128} />
-                </div>
-                <div className="font-medium text-gray-800 text-center text-sm" style={{ wordBreak: 'break-word' }}>
-                  {photo.caption}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Placed Students Carousel */}
-      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 text-gray-900">Our Placed Students</h2>
-            <p className="text-gray-700">Real outcomes: where our students are working and their packages</p>
-          </div>
-
-          <div className="relative overflow-hidden dc-carousel">
-            <div className="dc-carousel-track">
-              {[
-                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
-                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
-                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
-                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
-                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
-                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
-                // duplicate entries to create seamless loop
-                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
-                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
-                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
-                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
-                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
-                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
-              ].map((s, idx) => (
-                <div key={idx} className="w-72 shrink-0 mr-4 last:mr-0">
-                  <div className="rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-indigo-50">
-                        <Image src={s.photo} alt={s.name} width={56} height={56} />
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900 leading-tight">{s.name}</div>
-                        <div className="text-xs text-gray-600">{s.role} at {s.company}</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Package: {s.pkg}</div>
-                      <div className="h-6 w-20 overflow-hidden">
-                        <Image src={s.companyLogo} alt={s.company} width={80} height={24} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-center mt-6 text-xs text-gray-500">Auto-scrolling every ~3s per card. Hover to pause.</div>
-        </div>
-      </section>
-
-      {/* Testimonial Videos Section */}
-      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-indigo-50 to-blue-50">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
-              Video Testimonials from Placed Students
-            </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Watch our students share their placement journeys and experiences at Data Council
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Example videos, replace src with actual video URLs */}
-            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
-              <video controls width="320" poster="/students/student1.svg">
-                <source src="/videos/testimonial1.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="mt-4 text-center">
-                <div className="font-semibold text-gray-900">Priya Sharma</div>
-                <div className="text-sm text-gray-600">Data Analyst at TCS</div>
-                <blockquote className="italic text-gray-700 mt-2">“I got placed at TCS after completing the Data Science course!”</blockquote>
-              </div>
-            </div>
-            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
-              <video controls width="320" poster="/students/student2.svg">
-                <source src="/videos/testimonial2.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="mt-4 text-center">
-                <div className="font-semibold text-gray-900">Rahul Patel</div>
-                <div className="text-sm text-gray-600">AI Engineer at Infosys</div>
-                <blockquote className="italic text-gray-700 mt-2">“The hands-on projects helped me crack my interview!”</blockquote>
-              </div>
-            </div>
-            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
-              <video controls width="320" poster="/students/student3.svg">
-                <source src="/videos/testimonial3.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="mt-4 text-center">
-                <div className="font-semibold text-gray-900">Anjali Desai</div>
-                <div className="text-sm text-gray-600">ML Engineer at Wipro</div>
-                <blockquote className="italic text-gray-700 mt-2">“Supportive mentors and practical learning!”</blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* AI-Powered Learning Tools */}
       <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
@@ -645,6 +510,108 @@ export default function Home() {
             >
               🚀 Start Learning with AI Tools
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Placed Students Carousel */}
+      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-3 text-gray-900">Our Placed Students</h2>
+            <p className="text-gray-700">Real outcomes: where our students are working and their packages</p>
+          </div>
+
+          <div className="relative overflow-hidden dc-carousel">
+            <div className="dc-carousel-track">
+              {[
+                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                // duplicate entries to create seamless loop
+                { name: 'Priya Sharma', role: 'Data Analyst', company: 'TCS', pkg: '₹7.8 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Rahul Patel', role: 'AI Engineer', company: 'Infosys', pkg: '₹9.2 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Anjali Desai', role: 'ML Engineer', company: 'Wipro', pkg: '₹8.6 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+                { name: 'Aman Verma', role: 'Data Scientist', company: 'TCS', pkg: '₹10.1 LPA', photo: '/students/student1.svg', companyLogo: '/companies/tcs.svg' },
+                { name: 'Sneha Kulkarni', role: 'MLOps Engineer', company: 'Infosys', pkg: '₹11.5 LPA', photo: '/students/student2.svg', companyLogo: '/companies/infosys.svg' },
+                { name: 'Nikhil Joshi', role: 'Analytics Engineer', company: 'Wipro', pkg: '₹7.2 LPA', photo: '/students/student3.svg', companyLogo: '/companies/wipro.svg' },
+              ].map((s, idx) => (
+                <div key={idx} className="w-72 shrink-0 mr-4 last:mr-0">
+                  <div className="rounded-2xl border border-blue-200 bg-white/90 backdrop-blur-md shadow-sm p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-indigo-50">
+                        <Image src={s.photo} alt={s.name} width={56} height={56} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900 leading-tight">{s.name}</div>
+                        <div className="text-xs text-gray-600">{s.role} at {s.company}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Package: {s.pkg}</div>
+                      <div className="h-6 w-20 overflow-hidden">
+                        <Image src={s.companyLogo} alt={s.company} width={80} height={24} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-6 text-xs text-gray-500">Auto-scrolling every ~3s per card. Hover to pause.</div>
+        </div>
+      </section>
+
+      {/* Testimonial Videos Section - Placed Students */}
+      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-indigo-50 to-blue-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
+              Video Testimonials from Placed Students
+            </h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Watch our students share their placement journeys and experiences at Data Council
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Example videos, replace src with actual video URLs */}
+            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
+              <video controls width="320" poster="/students/student1.svg">
+                <source src="/videos/testimonial1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="mt-4 text-center">
+                <div className="font-semibold text-gray-900">Priya Sharma</div>
+                <div className="text-sm text-gray-600">Data Analyst at TCS</div>
+                <blockquote className="italic text-gray-700 mt-2">“I got placed at TCS after completing the Data Science course!”</blockquote>
+              </div>
+            </div>
+            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
+              <video controls width="320" poster="/students/student2.svg">
+                <source src="/videos/testimonial2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="mt-4 text-center">
+                <div className="font-semibold text-gray-900">Rahul Patel</div>
+                <div className="text-sm text-gray-600">AI Engineer at Infosys</div>
+                <blockquote className="italic text-gray-700 mt-2">“The hands-on projects helped me crack my interview!”</blockquote>
+              </div>
+            </div>
+            <div className="p-6 rounded-2xl border border-blue-200 bg-white/90 shadow-sm flex flex-col items-center">
+              <video controls width="320" poster="/students/student3.svg">
+                <source src="/videos/testimonial3.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="mt-4 text-center">
+                <div className="font-semibold text-gray-900">Anjali Desai</div>
+                <div className="text-sm text-gray-600">ML Engineer at Wipro</div>
+                <blockquote className="italic text-gray-700 mt-2">“Supportive mentors and practical learning!”</blockquote>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -927,6 +894,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Certificates We Provide Section */}
+      <section className="px-6 sm:px-10 md:px-14 lg:px-20 py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 text-gray-900">
+              Certificates We Provide
+            </h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Earn industry-recognized certificates after completing our programs. Showcase your skills and boost your career prospects!
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {[ 
+              { name: "Data Science Foundations", img: "/certificates/data-science.svg" },
+              { name: "AI Automation Bootcamp", img: "/certificates/ai-automation.svg" },
+              { name: "LLM Engineering Certificate", img: "/certificates/llm-engineering.svg" },
+              { name: "Machine Learning Expert", img: "/certificates/machine-learning.svg" },
+              { name: "MLOps Professional", img: "/certificates/mlops.svg" },
+              { name: "Analytics Specialist", img: "/certificates/analytics.svg" },
+            ].map((cert, idx) => (
+              <div
+                key={idx}
+                className="group p-6 rounded-2xl border border-indigo-200 bg-white/90 shadow-md flex flex-col items-center transition-all duration-300 hover:scale-105 hover:z-10"
+                style={{ minWidth: '220px', maxWidth: '320px', width: cert.name.length > 22 ? '320px' : '220px' }}
+              >
+                <div className="w-24 h-24 mb-4 rounded-xl overflow-hidden bg-indigo-50 flex items-center justify-center">
+                  <Image src={cert.img} alt={cert.name} width={96} height={96} />
+                </div>
+                <div className="text-base font-semibold text-gray-900 text-center break-words">
+                  {cert.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Lead Capture Section */}
       <section id="lead-capture" className="px-6 sm:px-10 md:px-14 lg:px-20 py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="mx-auto max-w-7xl">
@@ -1056,7 +1060,6 @@ export default function Home() {
                     className="w-full rounded-lg border border-blue-200 px-4 py-3 text-gray-900 focus:ring-2 focus:ring-indigo-400/50 focus:border-indigo-400 outline-none"
                   >
                     <option value="">Select course of interest</option>
-                      <option value="">Select course of interest</option>
                     <option value="data-science">Data Science</option>
                     <option value="ai-automation">AI Automation</option>
                     <option value="machine-learning">Machine Learning</option>
